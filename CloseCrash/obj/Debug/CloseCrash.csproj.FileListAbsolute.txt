@@ -1,0 +1,11 @@
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\bin\Debug\CloseCrash.exe.config
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\bin\Debug\CloseCrash.exe
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\bin\Debug\CloseCrash.pdb
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\bin\Debug\Siticone.UI.dll
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\obj\Debug\CloseCrash.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\obj\Debug\CloseCrash.Main.resources
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\obj\Debug\CloseCrash.Properties.Resources.resources
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\obj\Debug\CloseCrash.csproj.GenerateResource.cache
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\obj\Debug\CloseCrash.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\obj\Debug\CloseCrash.exe
+C:\Users\Admin\source\repos\CloseCrash\CloseCrash\obj\Debug\CloseCrash.pdb
