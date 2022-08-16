@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Management;
 using System.Windows.Forms;
 
 namespace CloseCrash
 {
     public partial class Main : Form
     {
-        public PerformanceCounter total_cpu = new PerformanceCounter("Processor Information", "% Processor Time", "_Total");
         public Main()
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
-            prbCPU.Value = 10;
+            ProcessGame.ListProcessGame = new List<ProcessGame>();
+            timerComputed.Start();
+            timerLoadProcess.Start();
         }
 
         private void btnCloseApp_Click(object sender, EventArgs e)
         {
-            Close();
+            this.BeginInvoke((MethodInvoker)delegate
+            { 
+                this.Close(); 
+            });
         }
 
         private void btnMiniSize_Click(object sender, EventArgs e)
@@ -41,9 +40,6 @@ namespace CloseCrash
         {
             CleanRam.IsRuning = !CleanRam.IsRuning;
             SetColor(CleanRam.IsRuning, this.btnCleanRam);
-            
-            
-            //Computer.Computed();
         }
 
         public void SetColor(bool IsRuning, ns1.SiticoneGradientButton button)
@@ -61,8 +57,23 @@ namespace CloseCrash
 
         private void timerComputed_Tick(object sender, EventArgs e)
         {
-            float t = total_cpu.NextValue();
-            prbCPU.Value = 10;
+            Computer.Computed();
+            prbRam.Value = Computer.PercentRam;
+            prbCPU.Value = Computer.PercentCpu;
+            lbPercentRam.Text = Computer.PercentRam + "%";
+            lbPercentCPU.Text = Computer.PercentCpu + "%";
+        }
+
+        private void timerLoadProcess_Tick(object sender, EventArgs e)
+        {
+            if (CheckCrash.IsRuning)
+            {
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    CheckCrash.CheckCrashGame(dataGridAcc);
+                });
+                lbTabRuning.Text = ProcessGame.ListProcessGame.Count.ToString();
+            }
         }
     }
 }

@@ -31,21 +31,16 @@ namespace CloseCrash
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelMain = new ns1.SiticonePanel();
             this.panelForm = new ns1.SiticonePanel();
             this.panelControl = new ns1.SiticonePanel();
             this.btnCleanRam = new ns1.SiticoneGradientButton();
             this.btnCheckCrash = new ns1.SiticoneGradientButton();
             this.dataGridAcc = new ns1.SiticoneDataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ram = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cpu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTab = new ns1.SiticonePanel();
             this.gbClean = new ns1.SiticoneGroupBox();
             this.lbTimeClean = new ns1.SiticoneLabel();
@@ -56,15 +51,15 @@ namespace CloseCrash
             this.panelAvatar = new ns1.SiticonePanel();
             this.ptAvatar = new ns1.SiticonePictureBox();
             this.panelStatus = new ns1.SiticonePanel();
+            this.prbDisk = new ns1.SiticoneProgressBar();
+            this.prbCPU = new ns1.SiticoneProgressBar();
+            this.prbRam = new ns1.SiticoneProgressBar();
             this.lbPercentDisk = new ns1.SiticoneLabel();
             this.lbPercentCPU = new ns1.SiticoneLabel();
             this.lbPercentRam = new ns1.SiticoneLabel();
             this.lbDisk = new ns1.SiticoneLabel();
-            this.prbDisk = new ns1.SiticoneVProgressBar();
             this.lbCpu = new ns1.SiticoneLabel();
-            this.prbCPU = new ns1.SiticoneVProgressBar();
             this.lbRam = new ns1.SiticoneLabel();
-            this.prbRam = new ns1.SiticoneVProgressBar();
             this.btnMiniSize = new ns1.SiticoneButton();
             this.btnCloseApp = new ns1.SiticoneButton();
             this.lbTitle = new ns1.SiticoneLabel();
@@ -77,6 +72,12 @@ namespace CloseCrash
             this.siticoneElipse7 = new ns1.SiticoneElipse(this.components);
             this.siticoneDragControl1 = new ns1.SiticoneDragControl(this.components);
             this.timerComputed = new System.Windows.Forms.Timer(this.components);
+            this.timerLoadProcess = new System.Windows.Forms.Timer(this.components);
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ram = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelMain.SuspendLayout();
             this.panelForm.SuspendLayout();
             this.panelControl.SuspendLayout();
@@ -104,7 +105,7 @@ namespace CloseCrash
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Name = "panelMain";
             this.panelMain.ShadowDecoration.Parent = this.panelMain;
-            this.panelMain.Size = new System.Drawing.Size(933, 588);
+            this.panelMain.Size = new System.Drawing.Size(923, 588);
             this.panelMain.TabIndex = 0;
             // 
             // panelForm
@@ -118,7 +119,7 @@ namespace CloseCrash
             this.panelForm.Location = new System.Drawing.Point(12, 40);
             this.panelForm.Name = "panelForm";
             this.panelForm.ShadowDecoration.Parent = this.panelForm;
-            this.panelForm.Size = new System.Drawing.Size(909, 536);
+            this.panelForm.Size = new System.Drawing.Size(895, 536);
             this.panelForm.TabIndex = 3;
             // 
             // panelControl
@@ -176,8 +177,8 @@ namespace CloseCrash
             this.dataGridAcc.AllowUserToDeleteRows = false;
             this.dataGridAcc.AllowUserToResizeColumns = false;
             this.dataGridAcc.AllowUserToResizeRows = false;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
-            this.dataGridAcc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.dataGridAcc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridAcc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridAcc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -185,48 +186,48 @@ namespace CloseCrash
             this.dataGridAcc.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridAcc.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dataGridAcc.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridAcc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridAcc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridAcc.ColumnHeadersHeight = 25;
             this.dataGridAcc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridAcc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.name,
+            this.subname,
             this.ram,
-            this.cpu,
             this.pid});
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridAcc.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridAcc.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridAcc.EnableHeadersVisualStyles = false;
             this.dataGridAcc.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(56)))), ((int)(((byte)(62)))));
             this.dataGridAcc.Location = new System.Drawing.Point(166, 166);
             this.dataGridAcc.MultiSelect = false;
             this.dataGridAcc.Name = "dataGridAcc";
             this.dataGridAcc.ReadOnly = true;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridAcc.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridAcc.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridAcc.RowHeadersVisible = false;
             this.dataGridAcc.RowTemplate.Height = 25;
             this.dataGridAcc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridAcc.Size = new System.Drawing.Size(733, 358);
+            this.dataGridAcc.Size = new System.Drawing.Size(717, 358);
             this.dataGridAcc.TabIndex = 4;
             this.dataGridAcc.Theme = ns5.DataGridViewPresetThemes.Dark;
             this.dataGridAcc.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
@@ -250,42 +251,6 @@ namespace CloseCrash
             this.dataGridAcc.ThemeStyle.RowsStyle.Height = 25;
             this.dataGridAcc.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
             this.dataGridAcc.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White;
-            // 
-            // id
-            // 
-            this.id.FillWeight = 50.76143F;
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.FillWeight = 128.9436F;
-            this.name.HeaderText = "Name Tab";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // ram
-            // 
-            this.ram.FillWeight = 128.9436F;
-            this.ram.HeaderText = "Ram";
-            this.ram.Name = "ram";
-            this.ram.ReadOnly = true;
-            // 
-            // cpu
-            // 
-            this.cpu.FillWeight = 95.67568F;
-            this.cpu.HeaderText = "CPU";
-            this.cpu.Name = "cpu";
-            this.cpu.ReadOnly = true;
-            // 
-            // pid
-            // 
-            this.pid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.pid.FillWeight = 95.67568F;
-            this.pid.HeaderText = "PID";
-            this.pid.Name = "pid";
-            this.pid.ReadOnly = true;
             // 
             // panelTab
             // 
@@ -375,10 +340,11 @@ namespace CloseCrash
             this.lbTabRuning.BackColor = System.Drawing.Color.Transparent;
             this.lbTabRuning.Font = new System.Drawing.Font("Segoe UI", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTabRuning.Location = new System.Drawing.Point(27, 62);
+            this.lbTabRuning.MinimumSize = new System.Drawing.Size(35, 39);
             this.lbTabRuning.Name = "lbTabRuning";
             this.lbTabRuning.Size = new System.Drawing.Size(35, 39);
             this.lbTabRuning.TabIndex = 0;
-            this.lbTabRuning.Text = "10";
+            this.lbTabRuning.Text = "-";
             this.lbTabRuning.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelAvatar
@@ -406,26 +372,64 @@ namespace CloseCrash
             // panelStatus
             // 
             this.panelStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(59)))), ((int)(((byte)(72)))));
+            this.panelStatus.Controls.Add(this.prbDisk);
+            this.panelStatus.Controls.Add(this.prbCPU);
+            this.panelStatus.Controls.Add(this.prbRam);
             this.panelStatus.Controls.Add(this.lbPercentDisk);
             this.panelStatus.Controls.Add(this.lbPercentCPU);
             this.panelStatus.Controls.Add(this.lbPercentRam);
             this.panelStatus.Controls.Add(this.lbDisk);
-            this.panelStatus.Controls.Add(this.prbDisk);
             this.panelStatus.Controls.Add(this.lbCpu);
-            this.panelStatus.Controls.Add(this.prbCPU);
             this.panelStatus.Controls.Add(this.lbRam);
-            this.panelStatus.Controls.Add(this.prbRam);
             this.panelStatus.Location = new System.Drawing.Point(479, 10);
             this.panelStatus.Name = "panelStatus";
             this.panelStatus.ShadowDecoration.Parent = this.panelStatus;
-            this.panelStatus.Size = new System.Drawing.Size(420, 150);
+            this.panelStatus.Size = new System.Drawing.Size(404, 150);
             this.panelStatus.TabIndex = 0;
+            // 
+            // prbDisk
+            // 
+            this.prbDisk.BorderRadius = 2;
+            this.prbDisk.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.prbDisk.Location = new System.Drawing.Point(67, 118);
+            this.prbDisk.Name = "prbDisk";
+            this.prbDisk.ProgressColor2 = System.Drawing.Color.Red;
+            this.prbDisk.ShadowDecoration.Parent = this.prbDisk;
+            this.prbDisk.Size = new System.Drawing.Size(280, 11);
+            this.prbDisk.TabIndex = 13;
+            this.prbDisk.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            // 
+            // prbCPU
+            // 
+            this.prbCPU.BorderRadius = 2;
+            this.prbCPU.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.prbCPU.Location = new System.Drawing.Point(67, 71);
+            this.prbCPU.Name = "prbCPU";
+            this.prbCPU.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.prbCPU.ProgressColor2 = System.Drawing.Color.Red;
+            this.prbCPU.ShadowDecoration.Parent = this.prbCPU;
+            this.prbCPU.Size = new System.Drawing.Size(280, 11);
+            this.prbCPU.TabIndex = 12;
+            this.prbCPU.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            // 
+            // prbRam
+            // 
+            this.prbRam.BorderRadius = 2;
+            this.prbRam.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.prbRam.Location = new System.Drawing.Point(67, 20);
+            this.prbRam.Name = "prbRam";
+            this.prbRam.ProgressColor = System.Drawing.Color.Yellow;
+            this.prbRam.ProgressColor2 = System.Drawing.Color.Red;
+            this.prbRam.ShadowDecoration.Parent = this.prbRam;
+            this.prbRam.Size = new System.Drawing.Size(280, 11);
+            this.prbRam.TabIndex = 11;
+            this.prbRam.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
             // lbPercentDisk
             // 
             this.lbPercentDisk.BackColor = System.Drawing.Color.Transparent;
             this.lbPercentDisk.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPercentDisk.Location = new System.Drawing.Point(373, 113);
+            this.lbPercentDisk.Location = new System.Drawing.Point(356, 113);
             this.lbPercentDisk.Name = "lbPercentDisk";
             this.lbPercentDisk.Size = new System.Drawing.Size(33, 19);
             this.lbPercentDisk.TabIndex = 10;
@@ -435,7 +439,7 @@ namespace CloseCrash
             // 
             this.lbPercentCPU.BackColor = System.Drawing.Color.Transparent;
             this.lbPercentCPU.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPercentCPU.Location = new System.Drawing.Point(373, 65);
+            this.lbPercentCPU.Location = new System.Drawing.Point(356, 65);
             this.lbPercentCPU.Name = "lbPercentCPU";
             this.lbPercentCPU.Size = new System.Drawing.Size(33, 19);
             this.lbPercentCPU.TabIndex = 9;
@@ -445,7 +449,7 @@ namespace CloseCrash
             // 
             this.lbPercentRam.BackColor = System.Drawing.Color.Transparent;
             this.lbPercentRam.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPercentRam.Location = new System.Drawing.Point(373, 14);
+            this.lbPercentRam.Location = new System.Drawing.Point(356, 14);
             this.lbPercentRam.Name = "lbPercentRam";
             this.lbPercentRam.Size = new System.Drawing.Size(33, 19);
             this.lbPercentRam.TabIndex = 8;
@@ -462,40 +466,16 @@ namespace CloseCrash
             this.lbDisk.TabIndex = 7;
             this.lbDisk.Text = "DISK:";
             // 
-            // prbDisk
-            // 
-            this.prbDisk.ForeColor = System.Drawing.Color.FloralWhite;
-            this.prbDisk.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.prbDisk.Location = new System.Drawing.Point(72, 119);
-            this.prbDisk.Name = "prbDisk";
-            this.prbDisk.ShadowDecoration.Parent = this.prbDisk;
-            this.prbDisk.Size = new System.Drawing.Size(293, 10);
-            this.prbDisk.TabIndex = 6;
-            this.prbDisk.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            // 
             // lbCpu
             // 
             this.lbCpu.BackColor = System.Drawing.Color.Transparent;
             this.lbCpu.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCpu.ForeColor = System.Drawing.Color.Red;
+            this.lbCpu.ForeColor = System.Drawing.Color.Aqua;
             this.lbCpu.Location = new System.Drawing.Point(10, 61);
             this.lbCpu.Name = "lbCpu";
             this.lbCpu.Size = new System.Drawing.Size(44, 27);
             this.lbCpu.TabIndex = 5;
             this.lbCpu.Text = "CPU:";
-            // 
-            // prbCPU
-            // 
-            this.prbCPU.ForeColor = System.Drawing.Color.Black;
-            this.prbCPU.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.prbCPU.Location = new System.Drawing.Point(72, 71);
-            this.prbCPU.Name = "prbCPU";
-            this.prbCPU.ShadowDecoration.Parent = this.prbCPU;
-            this.prbCPU.Size = new System.Drawing.Size(293, 10);
-            this.prbCPU.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.prbCPU.TabIndex = 4;
-            this.prbCPU.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
-            this.prbCPU.Value = 20;
             // 
             // lbRam
             // 
@@ -508,17 +488,6 @@ namespace CloseCrash
             this.lbRam.TabIndex = 3;
             this.lbRam.Text = "RAM: ";
             // 
-            // prbRam
-            // 
-            this.prbRam.ForeColor = System.Drawing.Color.FloralWhite;
-            this.prbRam.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.prbRam.Location = new System.Drawing.Point(72, 20);
-            this.prbRam.Name = "prbRam";
-            this.prbRam.ShadowDecoration.Parent = this.prbRam;
-            this.prbRam.Size = new System.Drawing.Size(293, 10);
-            this.prbRam.TabIndex = 2;
-            this.prbRam.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            // 
             // btnMiniSize
             // 
             this.btnMiniSize.BorderColor = System.Drawing.Color.White;
@@ -530,7 +499,7 @@ namespace CloseCrash
             this.btnMiniSize.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMiniSize.ForeColor = System.Drawing.Color.White;
             this.btnMiniSize.HoveredState.Parent = this.btnMiniSize;
-            this.btnMiniSize.Location = new System.Drawing.Point(855, 4);
+            this.btnMiniSize.Location = new System.Drawing.Point(840, 4);
             this.btnMiniSize.Name = "btnMiniSize";
             this.btnMiniSize.ShadowDecoration.Parent = this.btnMiniSize;
             this.btnMiniSize.Size = new System.Drawing.Size(30, 30);
@@ -549,7 +518,7 @@ namespace CloseCrash
             this.btnCloseApp.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseApp.ForeColor = System.Drawing.Color.White;
             this.btnCloseApp.HoveredState.Parent = this.btnCloseApp;
-            this.btnCloseApp.Location = new System.Drawing.Point(891, 4);
+            this.btnCloseApp.Location = new System.Drawing.Point(876, 4);
             this.btnCloseApp.Name = "btnCloseApp";
             this.btnCloseApp.ShadowDecoration.Parent = this.btnCloseApp;
             this.btnCloseApp.Size = new System.Drawing.Size(30, 30);
@@ -610,11 +579,52 @@ namespace CloseCrash
             this.timerComputed.Interval = 1000;
             this.timerComputed.Tick += new System.EventHandler(this.timerComputed_Tick);
             // 
+            // timerLoadProcess
+            // 
+            this.timerLoadProcess.Interval = 2000;
+            this.timerLoadProcess.Tick += new System.EventHandler(this.timerLoadProcess_Tick);
+            // 
+            // id
+            // 
+            this.id.FillWeight = 50.76143F;
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.FillWeight = 128.9436F;
+            this.name.HeaderText = "Process Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // subname
+            // 
+            this.subname.FillWeight = 95.67568F;
+            this.subname.HeaderText = "Main Title";
+            this.subname.Name = "subname";
+            this.subname.ReadOnly = true;
+            // 
+            // ram
+            // 
+            this.ram.FillWeight = 128.9436F;
+            this.ram.HeaderText = "Ram";
+            this.ram.Name = "ram";
+            this.ram.ReadOnly = true;
+            // 
+            // pid
+            // 
+            this.pid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.pid.FillWeight = 95.67568F;
+            this.pid.HeaderText = "PID";
+            this.pid.Name = "pid";
+            this.pid.ReadOnly = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 588);
+            this.ClientSize = new System.Drawing.Size(921, 588);
             this.Controls.Add(this.panelMain);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -661,12 +671,9 @@ namespace CloseCrash
         private ns1.SiticonePictureBox ptAvatar;
         private ns1.SiticoneElipse siticoneElipse6;
         private ns1.SiticoneLabel lbRam;
-        private ns1.SiticoneVProgressBar prbRam;
         private ns1.SiticoneLabel lbPercentRam;
         private ns1.SiticoneLabel lbDisk;
-        private ns1.SiticoneVProgressBar prbDisk;
         private ns1.SiticoneLabel lbCpu;
-        private ns1.SiticoneVProgressBar prbCPU;
         private ns1.SiticoneLabel lbPercentDisk;
         private ns1.SiticoneLabel lbPercentCPU;
         private ns1.SiticoneGroupBox gbClean;
@@ -681,12 +688,16 @@ namespace CloseCrash
         private ns1.SiticoneGradientButton btnCleanRam;
         private ns1.SiticoneGradientButton btnCheckCrash;
         private ns1.SiticoneDragControl siticoneDragControl1;
+        private System.Windows.Forms.Timer timerComputed;
+        private ns1.SiticoneProgressBar prbDisk;
+        private ns1.SiticoneProgressBar prbCPU;
+        private ns1.SiticoneProgressBar prbRam;
+        private System.Windows.Forms.Timer timerLoadProcess;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subname;
         private System.Windows.Forms.DataGridViewTextBoxColumn ram;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cpu;
         private System.Windows.Forms.DataGridViewTextBoxColumn pid;
-        private System.Windows.Forms.Timer timerComputed;
     }
 }
 
