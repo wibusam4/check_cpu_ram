@@ -30,20 +30,27 @@ namespace CloseCrash
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panelMain = new ns1.SiticonePanel();
             this.panelForm = new ns1.SiticonePanel();
             this.panelControl = new ns1.SiticonePanel();
+            this.tbTimeCleanRam = new ns1.SiticoneTextBox();
+            this.siticoneLabel1 = new ns1.SiticoneLabel();
             this.btnCleanRam = new ns1.SiticoneGradientButton();
             this.btnCheckCrash = new ns1.SiticoneGradientButton();
             this.dataGridAcc = new ns1.SiticoneDataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ram = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTab = new ns1.SiticonePanel();
             this.gbClean = new ns1.SiticoneGroupBox();
-            this.lbTimeClean = new ns1.SiticoneLabel();
+            this.lbTimeClean = new System.Windows.Forms.Label();
             this.gbCrash = new ns1.SiticoneGroupBox();
             this.lbTabCrash = new ns1.SiticoneLabel();
             this.gbTab = new ns1.SiticoneGroupBox();
@@ -73,11 +80,9 @@ namespace CloseCrash
             this.siticoneDragControl1 = new ns1.SiticoneDragControl(this.components);
             this.timerComputed = new System.Windows.Forms.Timer(this.components);
             this.timerLoadProcess = new System.Windows.Forms.Timer(this.components);
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ram = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.siticoneElipse8 = new ns1.SiticoneElipse(this.components);
+            this.timerCleanRam = new System.Windows.Forms.Timer(this.components);
+            this.btHelp = new ns1.SiticoneGradientButton();
             this.panelMain.SuspendLayout();
             this.panelForm.SuspendLayout();
             this.panelControl.SuspendLayout();
@@ -125,6 +130,9 @@ namespace CloseCrash
             // panelControl
             // 
             this.panelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(59)))), ((int)(((byte)(72)))));
+            this.panelControl.Controls.Add(this.btHelp);
+            this.panelControl.Controls.Add(this.tbTimeCleanRam);
+            this.panelControl.Controls.Add(this.siticoneLabel1);
             this.panelControl.Controls.Add(this.btnCleanRam);
             this.panelControl.Controls.Add(this.btnCheckCrash);
             this.panelControl.Location = new System.Drawing.Point(10, 166);
@@ -132,6 +140,49 @@ namespace CloseCrash
             this.panelControl.ShadowDecoration.Parent = this.panelControl;
             this.panelControl.Size = new System.Drawing.Size(150, 358);
             this.panelControl.TabIndex = 5;
+            // 
+            // tbTimeCleanRam
+            // 
+            this.tbTimeCleanRam.BackColor = System.Drawing.Color.Transparent;
+            this.tbTimeCleanRam.BorderColor = System.Drawing.Color.Black;
+            this.tbTimeCleanRam.BorderRadius = 5;
+            this.tbTimeCleanRam.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.tbTimeCleanRam.DefaultText = "120";
+            this.tbTimeCleanRam.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.tbTimeCleanRam.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.tbTimeCleanRam.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbTimeCleanRam.DisabledState.Parent = this.tbTimeCleanRam;
+            this.tbTimeCleanRam.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbTimeCleanRam.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbTimeCleanRam.FocusedState.Parent = this.tbTimeCleanRam;
+            this.tbTimeCleanRam.ForeColor = System.Drawing.Color.Black;
+            this.tbTimeCleanRam.HoveredState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbTimeCleanRam.HoveredState.Parent = this.tbTimeCleanRam;
+            this.tbTimeCleanRam.Location = new System.Drawing.Point(78, 157);
+            this.tbTimeCleanRam.Margin = new System.Windows.Forms.Padding(7);
+            this.tbTimeCleanRam.Name = "tbTimeCleanRam";
+            this.tbTimeCleanRam.PasswordChar = '\0';
+            this.tbTimeCleanRam.PlaceholderForeColor = System.Drawing.Color.Black;
+            this.tbTimeCleanRam.PlaceholderText = "";
+            this.tbTimeCleanRam.SelectedText = "";
+            this.tbTimeCleanRam.ShadowDecoration.Parent = this.tbTimeCleanRam;
+            this.tbTimeCleanRam.Size = new System.Drawing.Size(62, 45);
+            this.tbTimeCleanRam.TabIndex = 4;
+            this.tbTimeCleanRam.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // siticoneLabel1
+            // 
+            this.siticoneLabel1.AutoSize = false;
+            this.siticoneLabel1.AutoSizeHeightOnly = true;
+            this.siticoneLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(128)))), ((int)(((byte)(147)))));
+            this.siticoneLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.siticoneLabel1.Location = new System.Drawing.Point(10, 157);
+            this.siticoneLabel1.MinimumSize = new System.Drawing.Size(38, 45);
+            this.siticoneLabel1.Name = "siticoneLabel1";
+            this.siticoneLabel1.Size = new System.Drawing.Size(62, 45);
+            this.siticoneLabel1.TabIndex = 3;
+            this.siticoneLabel1.Text = "Delay Clean";
+            this.siticoneLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnCleanRam
             // 
@@ -225,7 +276,9 @@ namespace CloseCrash
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridAcc.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridAcc.RowHeadersVisible = false;
+            this.dataGridAcc.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridAcc.RowTemplate.Height = 25;
+            this.dataGridAcc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridAcc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridAcc.Size = new System.Drawing.Size(717, 358);
             this.dataGridAcc.TabIndex = 4;
@@ -251,6 +304,42 @@ namespace CloseCrash
             this.dataGridAcc.ThemeStyle.RowsStyle.Height = 25;
             this.dataGridAcc.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
             this.dataGridAcc.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White;
+            // 
+            // id
+            // 
+            this.id.FillWeight = 50.76143F;
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.FillWeight = 128.9436F;
+            this.name.HeaderText = "Process Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // subname
+            // 
+            this.subname.FillWeight = 95.67568F;
+            this.subname.HeaderText = "Main Title";
+            this.subname.Name = "subname";
+            this.subname.ReadOnly = true;
+            // 
+            // ram
+            // 
+            this.ram.FillWeight = 128.9436F;
+            this.ram.HeaderText = "Ram";
+            this.ram.Name = "ram";
+            this.ram.ReadOnly = true;
+            // 
+            // pid
+            // 
+            this.pid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.pid.FillWeight = 95.67568F;
+            this.pid.HeaderText = "PID";
+            this.pid.Name = "pid";
+            this.pid.ReadOnly = true;
             // 
             // panelTab
             // 
@@ -283,13 +372,16 @@ namespace CloseCrash
             // 
             // lbTimeClean
             // 
-            this.lbTimeClean.BackColor = System.Drawing.Color.Transparent;
-            this.lbTimeClean.Font = new System.Drawing.Font("Segoe UI", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTimeClean.Location = new System.Drawing.Point(23, 62);
+            this.lbTimeClean.AutoSize = true;
+            this.lbTimeClean.Font = new System.Drawing.Font("Segoe UI", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lbTimeClean.Location = new System.Drawing.Point(18, 64);
+            this.lbTimeClean.Margin = new System.Windows.Forms.Padding(0);
+            this.lbTimeClean.MinimumSize = new System.Drawing.Size(60, 37);
             this.lbTimeClean.Name = "lbTimeClean";
-            this.lbTimeClean.Size = new System.Drawing.Size(47, 39);
-            this.lbTimeClean.TabIndex = 1;
-            this.lbTimeClean.Text = "10s";
+            this.lbTimeClean.Size = new System.Drawing.Size(60, 37);
+            this.lbTimeClean.TabIndex = 0;
+            this.lbTimeClean.Text = "--";
+            this.lbTimeClean.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gbCrash
             // 
@@ -312,11 +404,12 @@ namespace CloseCrash
             // 
             this.lbTabCrash.BackColor = System.Drawing.Color.Transparent;
             this.lbTabCrash.Font = new System.Drawing.Font("Segoe UI", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTabCrash.Location = new System.Drawing.Point(29, 62);
+            this.lbTabCrash.Location = new System.Drawing.Point(34, 62);
             this.lbTabCrash.Name = "lbTabCrash";
-            this.lbTabCrash.Size = new System.Drawing.Size(35, 39);
+            this.lbTabCrash.Size = new System.Drawing.Size(25, 39);
             this.lbTabCrash.TabIndex = 1;
-            this.lbTabCrash.Text = "10";
+            this.lbTabCrash.Text = "--";
+            this.lbTabCrash.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gbTab
             // 
@@ -344,7 +437,7 @@ namespace CloseCrash
             this.lbTabRuning.Name = "lbTabRuning";
             this.lbTabRuning.Size = new System.Drawing.Size(35, 39);
             this.lbTabRuning.TabIndex = 0;
-            this.lbTabRuning.Text = "-";
+            this.lbTabRuning.Text = "--";
             this.lbTabRuning.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelAvatar
@@ -532,9 +625,9 @@ namespace CloseCrash
             this.lbTitle.Font = new System.Drawing.Font("Zilla Slab SemiBold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitle.Location = new System.Drawing.Point(12, 9);
             this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(252, 25);
+            this.lbTitle.Size = new System.Drawing.Size(416, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "Tool Clean Ram & Close Crash";
+            this.lbTitle.Text = "Tool Clean Ram & Close Crash - Tool.Wibu247.Net";
             // 
             // siticoneElipse1
             // 
@@ -576,7 +669,7 @@ namespace CloseCrash
             // 
             // timerComputed
             // 
-            this.timerComputed.Interval = 1000;
+            this.timerComputed.Interval = 2000;
             this.timerComputed.Tick += new System.EventHandler(this.timerComputed_Tick);
             // 
             // timerLoadProcess
@@ -584,41 +677,34 @@ namespace CloseCrash
             this.timerLoadProcess.Interval = 2000;
             this.timerLoadProcess.Tick += new System.EventHandler(this.timerLoadProcess_Tick);
             // 
-            // id
+            // siticoneElipse8
             // 
-            this.id.FillWeight = 50.76143F;
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
+            this.siticoneElipse8.BorderRadius = 5;
+            this.siticoneElipse8.TargetControl = this.siticoneLabel1;
             // 
-            // name
+            // timerCleanRam
             // 
-            this.name.FillWeight = 128.9436F;
-            this.name.HeaderText = "Process Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
+            this.timerCleanRam.Interval = 1000;
+            this.timerCleanRam.Tick += new System.EventHandler(this.timerCleanRam_Tick);
             // 
-            // subname
+            // btHelp
             // 
-            this.subname.FillWeight = 95.67568F;
-            this.subname.HeaderText = "Main Title";
-            this.subname.Name = "subname";
-            this.subname.ReadOnly = true;
-            // 
-            // ram
-            // 
-            this.ram.FillWeight = 128.9436F;
-            this.ram.HeaderText = "Ram";
-            this.ram.Name = "ram";
-            this.ram.ReadOnly = true;
-            // 
-            // pid
-            // 
-            this.pid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.pid.FillWeight = 95.67568F;
-            this.pid.HeaderText = "PID";
-            this.pid.Name = "pid";
-            this.pid.ReadOnly = true;
+            this.btHelp.BorderRadius = 5;
+            this.btHelp.CheckedState.Parent = this.btHelp;
+            this.btHelp.CustomImages.Parent = this.btHelp;
+            this.btHelp.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(128)))), ((int)(((byte)(147)))));
+            this.btHelp.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(143)))), ((int)(((byte)(166)))));
+            this.btHelp.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btHelp.ForeColor = System.Drawing.Color.White;
+            this.btHelp.HoveredState.Parent = this.btHelp;
+            this.btHelp.Image = ((System.Drawing.Image)(resources.GetObject("btHelp.Image")));
+            this.btHelp.Location = new System.Drawing.Point(10, 221);
+            this.btHelp.Name = "btHelp";
+            this.btHelp.ShadowDecoration.Parent = this.btHelp;
+            this.btHelp.Size = new System.Drawing.Size(130, 45);
+            this.btHelp.TabIndex = 5;
+            this.btHelp.Text = "HƯỚNG DẪN";
+            this.btHelp.Click += new System.EventHandler(this.btHelp_Click);
             // 
             // Main
             // 
@@ -677,7 +763,6 @@ namespace CloseCrash
         private ns1.SiticoneLabel lbPercentDisk;
         private ns1.SiticoneLabel lbPercentCPU;
         private ns1.SiticoneGroupBox gbClean;
-        private ns1.SiticoneLabel lbTimeClean;
         private ns1.SiticoneGroupBox gbCrash;
         private ns1.SiticoneLabel lbTabCrash;
         private ns1.SiticoneGroupBox gbTab;
@@ -698,6 +783,12 @@ namespace CloseCrash
         private System.Windows.Forms.DataGridViewTextBoxColumn subname;
         private System.Windows.Forms.DataGridViewTextBoxColumn ram;
         private System.Windows.Forms.DataGridViewTextBoxColumn pid;
+        private ns1.SiticoneLabel siticoneLabel1;
+        private ns1.SiticoneElipse siticoneElipse8;
+        private ns1.SiticoneTextBox tbTimeCleanRam;
+        private System.Windows.Forms.Timer timerCleanRam;
+        private System.Windows.Forms.Label lbTimeClean;
+        private ns1.SiticoneGradientButton btHelp;
     }
 }
 

@@ -12,6 +12,7 @@ namespace CloseCrash
     public class CheckCrash
     {
         public static bool IsRuning;
+        public static int CountTabCrash;
 
         public static void CheckCrashGame(DataGridView dg)
         {
@@ -26,12 +27,23 @@ namespace CloseCrash
             {
                 if(process != null && process.ProcessName.ToLower().Contains("dragonboy"))
                 {
+                    if (!process.Responding || process.MainWindowTitle.ToString().Contains("Oops"))
+                    {
+                        try
+                        {
+                            process.Kill();
+                            CountTabCrash++;
+                        } 
+                        catch 
+                        { }
+                        return;
+                    }
                     PerformanceCounter pf1 = new PerformanceCounter("Process", "Working Set - Private", process.ProcessName);
                     ProcessGame.ListProcessGame.Add(new ProcessGame
                     {
-                        PID = process.Id.ToString(),
+                        PID = process.Id,
                         NAMETAB = process.MainWindowTitle,
-                        RAM = (pf1.NextValue() / (1024*1024)).ToString(),
+                        RAM = pf1.NextValue() / (1024*1024),
                         TAB = process.ProcessName,
                     });
                 }
@@ -48,11 +60,15 @@ namespace CloseCrash
                         i,
                         processGame.TAB,
                         processGame.NAMETAB,
-                        processGame.RAM,
+                        string.Format("{0:0.##}", processGame.RAM) + " MB",
                         processGame.PID,
                     });
                     i++;
                 }
+            }
+            else
+            {
+                dg.Rows.Clear();
             }
         }
     }

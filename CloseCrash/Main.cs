@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Management;
 using System.Windows.Forms;
@@ -15,6 +16,8 @@ namespace CloseCrash
             ProcessGame.ListProcessGame = new List<ProcessGame>();
             timerComputed.Start();
             timerLoadProcess.Start();
+            timerCleanRam.Start();
+            this.tbTimeCleanRam.Size = new System.Drawing.Size(60, 45);
         }
 
         private void btnCloseApp_Click(object sender, EventArgs e)
@@ -38,8 +41,26 @@ namespace CloseCrash
 
         private void btnCleanRam_Click(object sender, EventArgs e)
         {
-            CleanRam.IsRuning = !CleanRam.IsRuning;
-            SetColor(CleanRam.IsRuning, this.btnCleanRam);
+            try
+            {
+                CleanRam._InStance().DelayCleanRam = int.Parse(tbTimeCleanRam.Text);
+                if(CleanRam._InStance().DelayCleanRam < 0)
+                {
+                    MessageBox.Show("Điền đúng giá trị", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                CleanRam.IsRuning = !CleanRam.IsRuning;
+                SetColor(CleanRam.IsRuning, this.btnCleanRam);
+            }
+            catch
+            {
+                MessageBox.Show("Điền đúng giá trị", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tự mò đi oni chan!", "Hê Hê", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void SetColor(bool IsRuning, ns1.SiticoneGradientButton button)
@@ -73,7 +94,33 @@ namespace CloseCrash
                     CheckCrash.CheckCrashGame(dataGridAcc);
                 });
                 lbTabRuning.Text = ProcessGame.ListProcessGame.Count.ToString();
+                lbTabCrash.Text = CheckCrash.CountTabCrash.ToString();
+            }
+            else
+            {
+                ProcessGame.ListProcessGame.Clear();
+                dataGridAcc.Rows.Clear();
+                lbTabRuning.Text = ProcessGame.ListProcessGame.Count.ToString();
+                lbTabCrash.Text = CheckCrash.CountTabCrash.ToString();
             }
         }
+
+        private void timerCleanRam_Tick(object sender, EventArgs e)
+        {
+            if (CleanRam.IsRuning)
+            {
+                this.BeginInvoke((MethodInvoker)delegate
+                {
+                    CleanRam._InStance().DoCleanRam(int.Parse(tbTimeCleanRam.Text));
+                });
+                lbTimeClean.Text = CleanRam._InStance().DelayCleanRam.ToString();
+                tbTimeCleanRam.Enabled = false;
+            }
+            else
+            {
+                tbTimeCleanRam.Enabled = true;
+            }
+        }
+
     }
 }

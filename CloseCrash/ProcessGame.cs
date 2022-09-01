@@ -9,9 +9,9 @@ namespace CloseCrash
     public class ProcessGame
     {
         public string TAB { get; set; }
-        public string RAM { get; set; }
+        public float RAM { get; set; }
         public string NAMETAB { get; set; }
-        public string PID { get; set; }
+        public int PID { get; set; }
         public static List<ProcessGame> ListProcessGame;
 
         public static ProcessGame InStance;

@@ -9,13 +9,15 @@ using System.Windows.Forms;
 using System.Threading;
 namespace CloseCrash
 {
-    class Computer
+    public class Computer
     {
         public static int PercentRam { get; set; }
         public static int PercentCpu { get; set; }
         public static int PercentDisk { get; set; }
         public static Thread GetRam;
         public static Thread GetCpu;
+        private static bool IsGetingRam;
+        private static bool IsGetingCpu;
 
         public static void Computed()
         {
@@ -25,8 +27,13 @@ namespace CloseCrash
 
         private static void GetPercentRam()
         {
+            if (IsGetingRam)
+            {
+                return;
+            }
             GetRam = new Thread(() =>
             {
+                IsGetingRam = true;
                 ManagementObjectSearcher wmiObject = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
                 var memoryValues = wmiObject.Get().Cast<ManagementObject>().Select(mo => new
                 {
@@ -38,8 +45,8 @@ namespace CloseCrash
                 {
                     var percentRam = ((memoryValues.TotalVisibleMemorySize - memoryValues.FreePhysicalMemory) / memoryValues.TotalVisibleMemorySize) * 100;
                     PercentRam = (int)percentRam;
-                    GetRam.Abort();
                 }
+                IsGetingRam = false;
             });
             GetRam.IsBackground = true;
             GetRam.Start();
@@ -47,8 +54,13 @@ namespace CloseCrash
 
         private static void GetPercentCpu()
         {
+            if (IsGetingCpu)
+            {
+                return;
+            }
             GetCpu = new Thread(() =>
             {
+                IsGetingCpu = true;
                 ObjectQuery objQuery = new ObjectQuery("SELECT * FROM Win32_PerfFormattedData_PerfOS_Processor WHERE Name=\"_Total\"");
                 ManagementObjectSearcher mngObjSearch = new ManagementObjectSearcher(objQuery);
                 ManagementObjectCollection mngObjColl = mngObjSearch.Get();
@@ -60,7 +72,6 @@ namespace CloseCrash
                         {
                             uint cpu_usage = 100 - Convert.ToUInt32(mngObject["PercentIdleTime"]);
                             PercentCpu = (int)cpu_usage;
-                            GetCpu.Abort();
                             break;
                         }
                         catch (Exception ex)
@@ -69,6 +80,7 @@ namespace CloseCrash
                         }
                     }
                 }
+                IsGetingCpu = false;
             });
             GetCpu.IsBackground = true;
             GetCpu.Start();
